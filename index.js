@@ -64,3 +64,6 @@ function request() {
 }
 
 setInterval(request, 10 * 1000);
+
+fs.writeFileSync('server.pid', process.pid);
+console.log('$$');

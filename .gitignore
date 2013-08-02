@@ -11,6 +11,7 @@ config.js
 pids
 logs
 results
+*.pid
 
 npm-debug.log
 .stock_cache.json
