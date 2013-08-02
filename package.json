@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/dead-horse/follow/issues"
   },
-  "dependences": {
+  "dependencies": {
     "urllib": "0.3.8",
     "pwechat": "0.0.6",
     "nodemailer": "0.4.4"
