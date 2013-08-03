@@ -15,6 +15,10 @@ var mail = require('./common/mail');
 var urllib = require('urllib');
 var fs = require('fs');
 
+function noop() {
+
+}
+
 var lastTrade = {};
 try {
   lastTrade = require(config.cachePath);
@@ -44,8 +48,8 @@ function SINAFINANCE13754599546396028(data) {
   console.log('第%s次请求...', requestTime);
 
   if (newstTrade.DealTime !== lastTrade.DealTime) {
-    wechat.sendStock(config.wechat.user, newstTrade, function () {});
-    mail.sendStock(config.mail.user, newstTrade, function () {});
+    wechat.sendStock(config.wechat.user, newstTrade, noop);
+    mail.sendStock(config.mail.user, newstTrade, noop);
     lastTrade = newstTrade;
     fs.writeFileSync(config.cachePath, JSON.stringify(newstTrade));
     console.log('获取到新的交易记录');
@@ -59,6 +63,9 @@ function request() {
     return;
   }
   urllib.request(config.url, function (err, data) {
+    if (err) {
+      return wechat.multiSend(config.wechat.user, '请求发生错误：' + err.message, noop);
+    }
     eval(data.toString());
   });
 }
