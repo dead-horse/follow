@@ -40,6 +40,7 @@ function checkTime() {
 }
 
 var requestTime = 0;
+var work = false;
 
 function SINAFINANCE13754599546396028(data) {
   data = data.data;
@@ -60,10 +61,18 @@ function SINAFINANCE13754599546396028(data) {
 
 function request() {
   if (!checkTime()) {
+    work = false;
     return;
+  }
+  if (!work) {
+    work = true;
+    wechat.multiSend(config.wechat.user, '开始获取交易！');
   }
   urllib.request(config.url, function (err, data) {
     if (err) {
+      if (err.message.indexOf('timeout') > 0) {
+        return ;
+      }
       return wechat.multiSend(config.wechat.user, '请求发生错误：' + err.message, noop);
     }
     eval(data.toString());
