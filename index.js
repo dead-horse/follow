@@ -66,7 +66,7 @@ function request() {
   }
   if (!work) {
     work = true;
-    wechat.multiSend(config.wechat.user, '开始获取交易！');
+    wechat.multiSend(config.wechat.user, '开始获取交易！', noop);
   }
   urllib.request(config.url, function (err, data) {
     if (err) {
