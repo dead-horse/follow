@@ -66,13 +66,14 @@ function request() {
   }
   if (!work) {
     work = true;
-    wechat.multiSend(config.wechat.user, '开始获取交易！', noop);
+    wechat.multiSend(config.wechat.user, '开始获取交易！');
   }
-  config.url.forEach(function (url) {
-
-  })
-
-
+  urllib.request(config.url, function (err, data) {
+    if (err) {
+      return wechat.multiSend(config.wechat.user, '请求发生错误：' + err.message, noop);
+    }
+    eval(data.toString());
+  });  
 }
 
 setInterval(request, 10 * 1000);
