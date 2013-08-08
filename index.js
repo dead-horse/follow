@@ -33,7 +33,7 @@ function checkTime() {
   if (hour < 9) {
     return false;
   }
-  if (hour > 16) {
+  if (hour > 15) {
     return false;
   }
   return true;
@@ -70,7 +70,7 @@ function request() {
   }
   urllib.request(config.url, function (err, data) {
     if (err) {
-      return wechat.multiSend(config.wechat.user, '请求发生错误：' + err.message, noop);
+      return ;
     }
     eval(data.toString());
   });  
