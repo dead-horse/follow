@@ -44,6 +44,9 @@ var work = false;
 
 function SINAFINANCE13754599546396028(data) {
   data = data.data;
+  if (!data) {
+    return ;
+  }
   var newstTrade = data[0];
   requestTime++;
   console.log('第%s次请求...', requestTime);
