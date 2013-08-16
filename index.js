@@ -83,3 +83,7 @@ setInterval(request, 10 * 1000);
 
 fs.writeFileSync('server.pid', process.pid);
 console.log('$$');
+
+process.on('uncaughtException', function(err) {
+  wechat.multiSend(config.wechat.user, '未知异常: ' + err.message, noop);
+});
