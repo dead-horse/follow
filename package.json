@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "urllib": "0.3.8",
-    "pwechat": "0.0.6",
+    "pwechat": "0.0.7",
     "nodemailer": "0.4.4"
   }
 }
